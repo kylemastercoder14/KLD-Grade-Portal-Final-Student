@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
+import { TanstackProvider } from "@/components/providers/tanstack-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 const fontSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -33,8 +34,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Toaster richColors position="top-right" />
+          <TanstackProvider>{children}</TanstackProvider>
+          <Toaster richColors position="top-center" />
         </ThemeProvider>
       </body>
     </html>

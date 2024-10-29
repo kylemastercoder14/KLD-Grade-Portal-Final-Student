@@ -12,3 +12,115 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Students {
+  id            String  @id @default(cuid())
+  studentNumber String
+  firstName     String
+  middleName    String?
+  lastName      String
+  extensionName String?
+  birthDate     String
+  age           String
+  gender        String
+  civilStatus   String
+  phoneNumber   String
+  region        String
+  province      String
+  city          String
+  barangay      String
+  houseNumber   String
+  zipCode       String
+  email         String
+  password      String
+  profileImage  String?
+  isArchive     Boolean @default(false)
+
+  elementarySchool String
+  highSchool       String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  yearLevelId String
+  yearLevels  YearLevels @relation(fields: [yearLevelId], references: [id])
+
+  programId String
+  programs  Programs @relation(fields: [programId], references: [id])
+
+  sectionId String
+  sections  Sections @relation(fields: [sectionId], references: [id])
+}
+
+model YearLevels {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student Students[]
+  section Sections[]
+}
+
+model Programs {
+  id        String   @id @default(cuid())
+  name      String
+  code      String
+  isArchive Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student Students[]
+  section Sections[]
+}
+
+model Sections {
+  id        String   @id @default(cuid())
+  name      String
+  isArchive Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  yearLevelId String
+  yearLevels  YearLevels @relation(fields: [yearLevelId], references: [id])
+
+  programId String
+  programs  Programs @relation(fields: [programId], references: [id])
+
+  student Students[]
+}
+
+model Courses {
+  id           String   @id @default(cuid())
+  name         String
+  code         String
+  unit         Int
+  prerequisite String?
+  isArchive    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Semester {
+  id        String   @id @default(cuid())
+  name      String
+  year      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Announcement {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  image       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Logs {
+  id        String   @id @default(cuid())
+  action    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
