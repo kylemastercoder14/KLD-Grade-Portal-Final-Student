@@ -43,7 +43,7 @@ const Dashboard = async () => {
           <span className="text-sm text-primary">Kyle Andre Lim</span>
         </div>
       </div>
-      <div className="dark:bg-zinc-900 bg-zinc-100 px-5 py-3 mt-3">
+      <div className="dark:bg-zinc-900 bg-zinc-100 px-5 py-3 mt-5">
         <p className="text-2xl font-semibold">Announcement</p>
         <p className="text-sm text-muted-foreground">
           Hi Kyle Andre Lim, kindly read about some of the important

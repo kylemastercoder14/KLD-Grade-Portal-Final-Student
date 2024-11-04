@@ -47,9 +47,9 @@ const AnnouncementClient = () => {
       {formattedData.map((announcement) => (
         <div
           key={announcement.id}
-          className="dark:bg-zinc-800 bg-zinc-200 px-3 py-3 mt-3"
+          className="border rounded-md px-3 py-3 mt-3"
         >
-          <Link href="#" className="text-xl font-semibold underline">{announcement.name}</Link>
+          <Link href={`/dashboard/${announcement.id}`} className="text-xl font-semibold underline">{announcement.name}</Link>
           <p className="text-sm text-muted-foreground">Posted last {format(announcement.createdAt, "MMMM dd, yyyy - h:mm a")} from Registrar&apos;s Office</p>
         </div>
       ))}

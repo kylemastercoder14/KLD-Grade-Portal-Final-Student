@@ -26,6 +26,7 @@ const UserDropdown = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>My Account</DropdownMenuItem>
+        <DropdownMenuItem>My Consultations</DropdownMenuItem>
         <DropdownMenuItem>Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
