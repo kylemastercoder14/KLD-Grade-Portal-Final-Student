@@ -89,7 +89,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
 
   const [showPassword, setShowPassword] = useState(false);
   const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
+    setShowPassword((prev) => !prev);
   };
 
   switch (fieldType) {
@@ -101,7 +101,11 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               <div className="shad-input-outer">
                 <Input
                   type={
-                    type === "password" && !showPassword ? "password" : type
+                    type === "password"
+                      ? showPassword
+                        ? "text"
+                        : "password"
+                      : type
                   }
                   placeholder={placeholder}
                   disabled={disabled}

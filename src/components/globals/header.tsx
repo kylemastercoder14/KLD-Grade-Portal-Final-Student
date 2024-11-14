@@ -50,19 +50,19 @@ const Header = () => {
         </div>
       </div>
       <div className="w-full px-[330px] border-t mx-auto flex gap-5 items-center">
-        <Link className={cn("border-r pr-3 py-2", pathname === "/dashboard" ? "text-primary" : "")} href="/dashboard">
+        <Link className={cn("border-r pr-3 py-2", pathname === "/student/dashboard" ? "text-primary" : "")} href="/student/dashboard">
           <Home />
         </Link>
-        <Link className={cn("border-r pr-3 py-2", pathname === "/grades" ? "text-primary" : "")} href="/grades">
+        <Link className={cn("border-r pr-3 py-2", pathname === "/student/grades" ? "text-primary" : "")} href="/student/grades">
           eCOG
         </Link>
-        <Link className={cn("border-r pr-3 py-2", pathname === "/consultation" ? "text-primary" : "")} href="/consultation">
+        <Link className={cn("border-r pr-3 py-2", pathname === "/student/consultation" ? "text-primary" : "")} href="/student/consultation">
           My Consultation
         </Link>
-        <Link className={cn("border-r pr-3 py-2", pathname === "/enrolled-course" ? "text-primary" : "")} href="/enrolled-course">
+        <Link className={cn("border-r pr-3 py-2", pathname === "/student/enrolled-course" ? "text-primary" : "")} href="/student/enrolled-course">
           My Current Enrolled Course
         </Link>
-        <Link className={cn("border-r pr-3 py-2", pathname === "/advising-services" ? "text-primary" : "")} href="/advising-services">
+        <Link className={cn("border-r pr-3 py-2", pathname === "/student/advising-services" ? "text-primary" : "")} href="/student/advising-services">
           Advising Services
         </Link>
         <Button size="sm" className="my-2">Request a Document</Button>
