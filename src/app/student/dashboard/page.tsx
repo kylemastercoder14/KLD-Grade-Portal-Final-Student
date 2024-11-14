@@ -1,4 +1,3 @@
-
 import { Home } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -9,8 +8,16 @@ import {
 } from "@tanstack/react-query";
 import { getAllAnnouncements } from "@/lib/server-actions/announcement";
 import AnnouncementClient from "./_components/client";
+import { useUser } from "@/hooks/use-user";
+import db from "@/lib/db";
 
 const Dashboard = async () => {
+  const { student } = await useUser();
+  const semester = await db.semester.findFirst({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
   const queryClient = new QueryClient();
 
   // Prefetch the data from the server
@@ -29,8 +36,7 @@ const Dashboard = async () => {
           <div className="flex flex-col items-start justify-center">
             <p className="text-xl font-semibold">Grade Portal</p>
             <p className="text-sm text-muted-foreground">
-              2024-2025 / 1st Semester / Bachelor of Science in Information
-              System
+              {semester?.year} / {semester?.name} / {student?.programs.name}
             </p>
           </div>
         </div>
@@ -40,7 +46,7 @@ const Dashboard = async () => {
             <Home size={15} />
           </Link>
           <p className="text-sm">/</p>
-          <span className="text-sm text-primary">Kyle Andre Lim</span>
+          <span className="text-sm text-primary">{student?.firstName} {student?.lastName}</span>
         </div>
       </div>
       <div className="dark:bg-zinc-900 bg-zinc-100 px-5 py-3 mt-5">

@@ -20,7 +20,7 @@ import {
   DATE_YEAR_MIN,
   FormFieldType,
   OPT_LENGTH,
-} from "@/lib/constants";
+} from "@/constants";
 import { cn } from "@/lib/utils";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
@@ -32,18 +32,26 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
+} from "../ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "../ui/button";
 import { Calendar } from "./custom-calendar";
 import { CalendarIcon, Eye, EyeOff } from "lucide-react";
 import { format } from "date-fns";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "../ui/checkbox";
 import HoverEffectWrapper from "@/components/ui/hover-effect-wrapper";
 import { DynamicSelect } from "./dynamic-select";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "../ui/textarea";
 import ImageUpload from "./image-uploader";
 import { DynamicArraySelect } from "./dynamic-array-select";
+import {
+  MultiSelector,
+  MultiSelectorContent,
+  MultiSelectorInput,
+  MultiSelectorItem,
+  MultiSelectorList,
+  MultiSelectorTrigger,
+} from "@/components/ui/multi-select";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -53,6 +61,7 @@ interface CustomProps {
   fieldType: FormFieldType;
   name: string;
   options?: Array<string>;
+  feedbackOptions?: { label: string; value: string; icon: string }[];
   dynamicOptions?: { label: string; value: string }[];
   label?: string;
   type?: string | number;
@@ -80,6 +89,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     type,
     options,
     dynamicOptions,
+    feedbackOptions,
     label,
     autoFocus,
     renderedValue,
@@ -99,6 +109,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           <HoverEffectWrapper disabled={disabled}>
             <FormControl>
               <div className="shad-input-outer">
+                {/* Input field */}
                 <Input
                   type={
                     type === "password"
@@ -114,13 +125,15 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                   autoFocus={autoFocus}
                   onChange={(event) => {
                     let value = event.target.value;
+                    // Handle number type and ensure empty values do not result in NaN
                     if (type === "number") {
-                      // Handle empty value to avoid NaN
                       value = value === "" ? "" : String(parseFloat(value));
                     }
-                    field.onChange(value);
+                    field.onChange(value); // Trigger field onChange with the processed value
                   }}
                 />
+
+                {/* Toggle visibility for password fields */}
                 {type === "password" && (
                   <button
                     type="button"
@@ -131,9 +144,9 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                     className="floating-right-btn"
                   >
                     {showPassword ? (
-                      <EyeOff className="w-4 h-4" />
+                      <EyeOff className="w-4 h-4" /> // Icon to indicate password visibility is off
                     ) : (
-                      <Eye className="w-4 h-4 opacity-50" />
+                      <Eye className="w-4 h-4 opacity-50" /> // Icon to indicate password visibility is on
                     )}
                   </button>
                 )}
@@ -214,6 +227,51 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             <InputOTPSlot index={5} />
           </InputOTP>
         </FormControl>
+      );
+
+    case FormFieldType.MULTISELECT:
+      return (
+        <>
+          <FormControl>
+            <MultiSelector
+              values={field.value}
+              onValuesChange={field.onChange}
+              loop
+            >
+              <MultiSelectorTrigger
+                className={cn(
+                  "shad-select-trigger",
+                  !field.value && "text-muted-foreground"
+                )}
+              >
+                <MultiSelectorInput
+                  disabled={disabled}
+                  placeholder={placeholder}
+                />
+              </MultiSelectorTrigger>
+              <MultiSelectorContent>
+                <MultiSelectorList>
+                  {dynamicOptions && dynamicOptions.length > 0
+                    ? dynamicOptions.map((option) => (
+                        <MultiSelectorItem
+                          key={option.value}
+                          value={option.value}
+                        >
+                          {option.label}
+                        </MultiSelectorItem>
+                      ))
+                    : options?.map((option) => (
+                        <MultiSelectorItem key={option} value={option}>
+                          {option}
+                        </MultiSelectorItem>
+                      ))}
+                </MultiSelectorList>
+              </MultiSelectorContent>
+            </MultiSelector>
+          </FormControl>
+
+          {description && <FormDescription>{description}</FormDescription>}
+        </>
       );
 
     case FormFieldType.SELECT:
@@ -354,6 +412,37 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
         </FormControl>
       );
 
+    case FormFieldType.FEEDBACK_RADIO:
+      return (
+        <FormControl>
+          <RadioGroup
+            value={field.value}
+            onValueChange={field.onChange}
+            className="grid-cols-3"
+            disabled={disabled}
+          >
+            {feedbackOptions &&
+              feedbackOptions.map((option) => (
+                <label
+                  key={option.value}
+                  className="relative flex cursor-pointer flex-col items-center gap-3 rounded-lg border border-input px-2 py-3 text-center shadow-sm shadow-black/5 ring-offset-background transition-colors has-[[data-state=checked]]:border-ring has-[[data-state=checked]]:bg-accent has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring/70 has-[:focus-visible]:ring-offset-2"
+                >
+                  <FormControl>
+                    <RadioGroupItem
+                      value={option.value}
+                      className="sr-only after:absolute after:inset-0"
+                    />
+                  </FormControl>
+                  <p>{option.icon}</p>
+                  <p className="text-xs font-medium leading-none text-foreground">
+                    {option.label}
+                  </p>
+                </label>
+              ))}
+          </RadioGroup>
+        </FormControl>
+      );
+
     case FormFieldType.CHECKBOX:
       return (
         <div className="items-top flex space-x-2">
@@ -425,11 +514,9 @@ const CustomFormField = (props: CustomProps) => {
               <FormLabel>
                 {label}
                 {isRequired === true ? (
-                  <span className="text-red-700 text-lg"> *</span>
+                  <span className="text-red-700 text-xs"> *</span>
                 ) : isRequired === false ? (
-                  <span className="text-gray-500 text-xs font-normal ml-2">
-                    (Optional)
-                  </span>
+                  <span className="text-gray-500 text-xs ml-2">(Optional)</span>
                 ) : (
                   ""
                 )}

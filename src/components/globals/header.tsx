@@ -1,30 +1,18 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import UserDropdown from "./user-dropdown";
-import { Switch } from "../ui/switch";
-import { Label } from "../ui/label";
-import { useTheme } from "next-themes";
-import { Home } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
-import { Button } from "../ui/button";
+import SwitchMode from "./switch-mode";
+import NavLink from "./nav-link";
+import { useUser } from "@/hooks/use-user";
 
-const Header = () => {
-  const { theme, setTheme } = useTheme();
-  const pathname = usePathname();
-
-  const handleToggle = (checked: boolean) => {
-    setTheme(checked ? "light" : "dark");
-  };
-
-
+const Header = async () => {
+  const { student } = await useUser();
+  if (!student) return null;
   return (
-    <div className="sticky dark:bg-zinc-900 bg-zinc-100 inset-x-0 top-0 border-b w-full">
+    <div className="sticky dark:bg-zinc-900 bg-zinc-100 z-50 inset-x-0 top-0 border-b w-full">
       <div className="max-w-7xl mx-auto flex py-2 items-center justify-between">
-        <Link className="flex items-center gap-3" href="/dashboard">
+        <Link className="flex items-center gap-3" href="/student/dashboard">
           <Image src="/kld-logo.png" alt="Logo" width={60} height={60} />
           <div className="flex flex-col">
             <p className="text-xl tracking-[-0.08em] font-bold">
@@ -36,37 +24,11 @@ const Header = () => {
           </div>
         </Link>
         <div className="flex items-center gap-3">
-          <div className="flex items-center space-x-2">
-            <Switch
-              id="dark-mode"
-              checked={theme === "light"}
-              onCheckedChange={handleToggle}
-            />
-            <Label htmlFor="dark-mode">
-              {theme === "light" ? "Dark" : "Light"} Mode
-            </Label>
-          </div>
-          <UserDropdown />
+          <SwitchMode />
+          <UserDropdown user={student} />
         </div>
       </div>
-      <div className="w-full px-[330px] border-t mx-auto flex gap-5 items-center">
-        <Link className={cn("border-r pr-3 py-2", pathname === "/student/dashboard" ? "text-primary" : "")} href="/student/dashboard">
-          <Home />
-        </Link>
-        <Link className={cn("border-r pr-3 py-2", pathname === "/student/grades" ? "text-primary" : "")} href="/student/grades">
-          eCOG
-        </Link>
-        <Link className={cn("border-r pr-3 py-2", pathname === "/student/consultation" ? "text-primary" : "")} href="/student/consultation">
-          My Consultation
-        </Link>
-        <Link className={cn("border-r pr-3 py-2", pathname === "/student/enrolled-course" ? "text-primary" : "")} href="/student/enrolled-course">
-          My Current Enrolled Course
-        </Link>
-        <Link className={cn("border-r pr-3 py-2", pathname === "/student/advising-services" ? "text-primary" : "")} href="/student/advising-services">
-          Advising Services
-        </Link>
-        <Button size="sm" className="my-2">Request a Document</Button>
-      </div>
+      <NavLink />
     </div>
   );
 };
