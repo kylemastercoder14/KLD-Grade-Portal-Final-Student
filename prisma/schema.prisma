@@ -13,9 +13,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Admin {
+  id       String @id @default(cuid())
+  username String
+  password String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Students {
   id            String  @id @default(cuid())
-  studentNumber String
+  studentNumber String  @unique
   firstName     String
   middleName    String?
   lastName      String
@@ -50,6 +59,66 @@ model Students {
 
   sectionId String
   sections  Sections @relation(fields: [sectionId], references: [id])
+
+  grades Grades[]
+}
+
+model Teachers {
+  id            String  @id @default(cuid())
+  employeeId    String
+  firstName     String
+  middleName    String?
+  lastName      String
+  extensionName String?
+  birthDate     String
+  age           String
+  gender        String
+  civilStatus   String
+  phoneNumber   String
+  region        String
+  province      String
+  city          String
+  barangay      String
+  houseNumber   String
+  zipCode       String
+  email         String
+  password      String
+  profileImage  String?
+  isArchive     Boolean @default(false)
+  position      String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  asssignTeacher      AssignTeacher[]
+  assignCourseTeacher AssignCourseTeacher[]
+}
+
+model AssignTeacher {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  teacherId String
+  teacher   Teachers @relation(fields: [teacherId], references: [id])
+
+  sectionId String
+  section   Sections @relation(fields: [sectionId], references: [id])
+}
+
+model AssignCourseTeacher {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  teacherId String
+  teacher   Teachers @relation(fields: [teacherId], references: [id])
+
+  sectionId String
+  section   Sections @relation(fields: [sectionId], references: [id])
+
+  courseId String
+  course   Courses @relation(fields: [courseId], references: [id])
 }
 
 model YearLevels {
@@ -65,18 +134,19 @@ model YearLevels {
 model Programs {
   id        String   @id @default(cuid())
   name      String
-  code      String
+  code      String   @unique
   isArchive Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   student Students[]
   section Sections[]
+  grades  Grades[]
 }
 
 model Sections {
   id        String   @id @default(cuid())
-  name      String
+  name      String   @unique
   isArchive Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -87,18 +157,24 @@ model Sections {
   programId String
   programs  Programs @relation(fields: [programId], references: [id])
 
-  student Students[]
+  student             Students[]
+  assignTeacher       AssignTeacher[]
+  assignCourseTeacher AssignCourseTeacher[]
+  grades              Grades[]
 }
 
 model Courses {
   id           String   @id @default(cuid())
   name         String
-  code         String
+  code         String   @unique
   unit         Int
   prerequisite String?
   isArchive    Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  assignCourseTeacher AssignCourseTeacher[]
+  grades              Grades[]
 }
 
 model Semester {
@@ -121,6 +197,65 @@ model Announcement {
 model Logs {
   id        String   @id @default(cuid())
   action    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Period {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Grades {
+  id                 String   @id @default(cuid())
+  studentNumber      String   @unique
+  student            Students @relation(fields: [studentNumber], references: [studentNumber])
+  courseCode         String
+  course             Courses  @relation(fields: [courseCode], references: [code])
+  programCode        String
+  programs           Programs @relation(fields: [programCode], references: [code])
+  sectionName        String
+  section            Sections @relation(fields: [sectionName], references: [name])
+  period             String
+  grade              Float
+  remarks            String
+  teacherSigned      Boolean  @default(true)
+  programChairSigned Boolean  @default(false)
+  deanSigned         Boolean  @default(false)
+  registrarSigned    Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UploadedEcr {
+  id        String @id @default(cuid())
+  teacherId String
+  name      String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Support {
+  id         String @id @default(cuid())
+  email      String
+  name       String
+  concerns   String
+  attachment String
+  status     String @default("Pending")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Feedback {
+  id        String   @id @default(cuid())
+  name      String
+  feedback  String
+  comment   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
