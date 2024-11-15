@@ -60,7 +60,8 @@ model Students {
   sectionId String
   sections  Sections @relation(fields: [sectionId], references: [id])
 
-  grades Grades[]
+  grades          Grades[]
+  documentRequest DocumentRequest[]
 }
 
 model Teachers {
@@ -258,4 +259,17 @@ model Feedback {
   comment   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model DocumentRequest {
+  id           String @id @default(cuid())
+  typeDocument String
+  purpose      String
+  status       String @default("Pending")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  studentNumber String
+  student       Students @relation(fields: [studentNumber], references: [studentNumber])
 }

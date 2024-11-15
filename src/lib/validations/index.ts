@@ -55,3 +55,8 @@ export const StudentValidators = z
     message: "Passwords do not match",
     path: ["confirmPassword"], // This specifies which field the error should appear on
   });
+
+export const DocumentValidators = z.object({
+  typeDocument: z.string().min(1, { message: "Type of document is required" }),
+  purpose: z.string().min(1, { message: "Purpose is required" }),
+});
