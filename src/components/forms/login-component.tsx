@@ -8,7 +8,7 @@ import { LoginValidators } from "@/lib/validations";
 import { Form } from "../ui/form";
 import CustomFormField from "../globals/custom-formfield";
 import { Button } from "../ui/button";
-import { FormFieldType } from "@/lib/constants";
+import { FormFieldType } from "@/constants";
 import { loginStudent } from "@/lib/server-actions/login";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";

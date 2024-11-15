@@ -8,7 +8,7 @@ import { ResetPasswordValidators } from "@/lib/validations";
 import { Form } from "../ui/form";
 import CustomFormField from "../globals/custom-formfield";
 import { Button } from "../ui/button";
-import { FormFieldType } from "@/lib/constants";
+import { FormFieldType } from "@/constants";
 
 const ResetPasswordComponent = () => {
   const form = useForm<z.infer<typeof ResetPasswordValidators>>({
