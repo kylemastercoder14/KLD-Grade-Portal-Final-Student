@@ -48,7 +48,12 @@ const UserDropdown = ({ user }: { user: UserDropdownProps }) => {
         <DropdownMenuItem asChild>
           <Link href="/student/account">My Account</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>My Consultations</DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/student/my-consultation">My Consultations</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/student/requested-documents">Requested Documents</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

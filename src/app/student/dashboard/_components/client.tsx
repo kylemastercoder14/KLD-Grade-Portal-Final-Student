@@ -3,6 +3,7 @@
 import { useGetAnnouncement } from "@/data/announcement";
 import { Announcement } from "@prisma/client";
 import { format } from "date-fns";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
@@ -39,20 +40,42 @@ const AnnouncementClient = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center flex-col">
+        <Loader2 className="w-5 h-5 animate-spin" />
+      </div>
+    );
   }
 
   return (
     <div>
-      {formattedData.map((announcement) => (
-        <div
-          key={announcement.id}
-          className="border rounded-md px-3 py-3 mt-3"
-        >
-          <Link href={`/dashboard/${announcement.id}`} className="text-xl font-semibold underline">{announcement.name}</Link>
-          <p className="text-sm text-muted-foreground">Posted last {format(announcement.createdAt, "MMMM dd, yyyy - h:mm a")} from Registrar&apos;s Office</p>
-        </div>
-      ))}
+      {formattedData.length === 0 ? (
+        <p className="border rounded-md text-muted-foreground font-semibold text-center px-3 py-3 mt-3">
+          No announcement available
+        </p>
+      ) : (
+        formattedData.map((announcement) => (
+          <div
+            key={announcement.id}
+            className="border rounded-md px-3 py-3 mt-3"
+          >
+            <Link
+              href={`/student/dashboard/${announcement.id}`}
+              className="text-xl font-semibold underline"
+            >
+              {announcement.name}
+            </Link>
+            <p className="text-sm text-muted-foreground">
+              Posted last{" "}
+              {format(
+                new Date(announcement.createdAt),
+                "MMMM dd, yyyy - h:mm a"
+              )}{" "}
+              from Registrar&apos;s Office
+            </p>
+          </div>
+        ))
+      )}
     </div>
   );
 };

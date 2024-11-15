@@ -7,6 +7,35 @@ import db from "@/lib/db";
 import { z } from "zod";
 import { DocumentValidators } from "../validations";
 
+export const getAllRequestedDocuments = async () => {
+  const { student } = await useUser();
+  if (!student) {
+    return { error: "You must be logged in to get all requested documents" };
+  }
+  try {
+    const data = await db.documentRequest.findMany({
+      where: {
+        studentNumber: student.studentNumber,
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
+      include: {
+        student: true,
+      },
+    });
+
+    if (!data) {
+      return { error: "No requested documents found." };
+    }
+
+    return { data };
+  } catch (error) {
+    console.error(error);
+    return { error: "Something went wrong." };
+  }
+};
+
 export const requestDocument = async (
   values: z.infer<typeof DocumentValidators>
 ) => {
@@ -29,7 +58,7 @@ export const requestDocument = async (
       data: {
         purpose,
         typeDocument,
-        studentNumber: student.studentNumber
+        studentNumber: student.studentNumber,
       },
     });
 

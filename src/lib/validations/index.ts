@@ -60,3 +60,21 @@ export const DocumentValidators = z.object({
   typeDocument: z.string().min(1, { message: "Type of document is required" }),
   purpose: z.string().min(1, { message: "Purpose is required" }),
 });
+
+export const ConsultationValidators = z.object({
+  teacher: z.string().min(1, { message: "Teacher is required" }),
+  courseId: z.string().min(1, { message: "Course ID is required" }),
+  teacherId: z.string().min(1, { message: "Teacher ID is required" }),
+  concern: z.string().min(1, { message: "Concern is required" }),
+  comment: z.string().min(1, { message: "Comment is required" }),
+});
+
+export const FeedbackValidators = z.object({
+  feedback: z.string().min(1, { message: "Feedback is required" }),
+  comment: z.string().optional(),
+});
+
+export const SupportValidators = z.object({
+  concern: z.string().min(1, { message: "Concern is required" }),
+  attachment: z.string().min(1, { message: "Attachment is required" }),
+});

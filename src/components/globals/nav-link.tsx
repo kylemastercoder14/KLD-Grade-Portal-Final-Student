@@ -17,7 +17,7 @@ const NavLink = () => {
       <div className="w-full px-[330px] border-t mx-auto flex gap-5 items-center">
         <Link
           className={cn(
-            "border-r pr-3 py-2",
+            "border-r pr-3 py-2 hover:text-primary",
             pathname === "/student/dashboard" ? "text-primary" : ""
           )}
           href="/student/dashboard"
@@ -26,7 +26,7 @@ const NavLink = () => {
         </Link>
         <Link
           className={cn(
-            "border-r pr-3 py-2",
+            "border-r pr-3 py-2 hover:text-primary",
             pathname === "/student/grades" ? "text-primary" : ""
           )}
           href="/student/grades"
@@ -35,7 +35,7 @@ const NavLink = () => {
         </Link>
         <Link
           className={cn(
-            "border-r pr-3 py-2",
+            "border-r pr-3 py-2 hover:text-primary",
             pathname === "/student/consultation" ? "text-primary" : ""
           )}
           href="/student/consultation"
@@ -44,7 +44,7 @@ const NavLink = () => {
         </Link>
         <Link
           className={cn(
-            "border-r pr-3 py-2",
+            "border-r pr-3 py-2 hover:text-primary",
             pathname === "/student/enrolled-course" ? "text-primary" : ""
           )}
           href="/student/enrolled-course"
@@ -53,7 +53,7 @@ const NavLink = () => {
         </Link>
         <Link
           className={cn(
-            "border-r pr-3 py-2",
+            "border-r pr-3 py-2 hover:text-primary",
             pathname === "/student/advising-services" ? "text-primary" : ""
           )}
           href="/student/advising-services"
