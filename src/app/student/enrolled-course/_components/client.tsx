@@ -9,14 +9,24 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useGetCourseTeacher } from "@/data/course-teacher";
+import { Loader2 } from "lucide-react";
 import React from "react";
+import { toast } from "sonner";
 
 const EnrolledCourseClient = () => {
+  const { data: courseTeacher, error, isLoading } = useGetCourseTeacher();
   const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  React.useEffect(() => {
+    if (error) {
+      toast.error(error.message || "An error occurred");
+    }
+  }, [error]);
 
   if (!isMounted) {
     return null;
@@ -37,12 +47,26 @@ const EnrolledCourseClient = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell>Multimedia Systems (PCIS2220)</TableCell>
-            <TableCell>3</TableCell>
-            <TableCell>Human Computer Interaction (PCIS2210)</TableCell>
-            <TableCell>Inst. John Paulo B. Mungcal</TableCell>
-          </TableRow>
+          {isLoading ? (
+            <TableRow>
+              <TableCell colSpan={5} className="text-center">
+                <Loader2 className="w-4 h-4 animate-spin" />
+              </TableCell>
+            </TableRow>
+          ) : (
+            courseTeacher?.data?.map((course) => (
+              <TableRow key={course.id}>
+                <TableCell>
+                  {course.course.name} ({course.course.code})
+                </TableCell>
+                <TableCell>{course.course.unit}</TableCell>
+                <TableCell>{course.course.prerequisite || "N/A"}</TableCell>
+                <TableCell>
+                  Inst. {course.teacher.firstName} {course.teacher.lastName}
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
     </div>
