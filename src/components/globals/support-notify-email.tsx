@@ -11,6 +11,7 @@ import {
   Section,
   Text,
   render,
+  Row,
 } from "@react-email/components";
 import * as React from "react";
 import { format } from "date-fns";
@@ -30,32 +31,43 @@ export const SupportNotifyEmail = ({ date, name }: NotifyEmailProps) => {
       <Body style={main}>
         <Container style={container}>
           <Section>
-            <Column>
-              <Img
-                src={`https://kld-grade-portal.s3.us-east-1.amazonaws.com/uploads/kld-logo.png`}
-                width="150"
-                height="150"
-                alt="Kolehiyo ng Lungsod ng Dasmariñas"
-              />
-            </Column>
-
-            <Column align="right" style={tableCell}>
-              <Text style={heading}>Support Ticket Notification</Text>
-              <Text style={informationTableLabel}>
-                {format(date, "dd MMM yyyy")}
-              </Text>
-            </Column>
+            <Row>
+              <Column>
+                <Img
+                  src={`https://kld-grade-portal.s3.us-east-1.amazonaws.com/uploads/kld-logo.png`}
+                  width="150"
+                  height="150"
+                  alt="Kolehiyo ng Lungsod ng Dasmariñas"
+                />
+              </Column>
+            </Row>
           </Section>
 
-          <Section style={informationTable}>
-            <Text style={informationTableLabel}>Regal Day! {name},</Text>
-            <Text style={informationTableValue}>
-              Thank you for reaching out to us. We have received your support.
-              We will get back to you as soon as possible.
+          <Section>
+            <Hr style={hr} />
+            <Text style={heading}>
+              Kolehiyo ng Lungsod ng Dasmariñas - Grade Portal
+            </Text>
+            <Text style={paragraph}>Regal Day! {name},</Text>
+            <Text style={paragraph}>
+              We strive to make KLD Grades Portal a safe and trusted experience
+              for users.
+            </Text>
+            <Text style={paragraph}>
+              We have received your support ticket on{" "}
+              {format(date, "dd MMM yyyy")} and will get back to you as soon as
+              possible. Thank you for reaching out to us. We appreciate your
+              time and patience.
+            </Text>
+            <Hr style={hr} />
+          </Section>
+
+          <Section>
+            <Text style={paragraph}>Thank you,</Text>
+            <Text style={{ ...paragraph, fontSize: "20px" }}>
+              The KLD Grades Portal Team
             </Text>
           </Section>
-
-          <Hr />
 
           <Section style={informationTable}>
             <Text style={informationTableDisclaimer}>
@@ -76,13 +88,18 @@ export const SupportNotifyEmail = ({ date, name }: NotifyEmailProps) => {
             </Text>
           </Section>
 
-          <Text style={footerCopyright}>
-            Copyright © 2024 Kolehiyo ng Lungsod ng Dasmariñas. All rights
-            reserved. <br />{" "}
-            <Link style={linkColor} href="https://www.facebook.com/kyleandre.lim29/">
-              Developed By: Kyle Andre Lim
-            </Link>
-          </Text>
+          <Section>
+            <Text style={footerCopyright}>
+              Copyright © 2024 Kolehiyo ng Lungsod ng Dasmariñas. All rights
+              reserved. <br />{" "}
+              <Link
+                style={link}
+                href="https://www.facebook.com/kyleandre.lim29/"
+              >
+                Developed By: Kyle Andre Lim
+              </Link>
+            </Text>
+          </Section>
         </Container>
       </Body>
     </Html>
@@ -95,32 +112,24 @@ export const NotifyEmailHTML = (props: NotifyEmailProps) =>
   });
 
 const main = {
-  fontFamily: '"Helvetica Neue",Helvetica,Arial,sans-serif',
-  backgroundColor: "#ffffff",
-};
-
-const linkColor = {
-  color: "rgb(13, 42, 31)",
-}
-
-const resetText = {
-  margin: "0",
-  padding: "0",
-  lineHeight: 1.4,
+  backgroundColor: "#fff",
+  fontFamily:
+    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
 };
 
 const container = {
-  margin: "0 auto",
-  padding: "20px 0 48px",
+  margin: "30px auto",
+  backgroundColor: "#fff",
+  borderRadius: 5,
   width: "660px",
+  overflow: "hidden",
 };
 
-const tableCell = { display: "table-cell" };
-
 const heading = {
-  fontSize: "28px",
-  fontWeight: "300",
-  color: "#888888",
+  fontSize: "14px",
+  lineHeight: "26px",
+  fontWeight: "700",
+  color: "rgb(13, 42, 31)",
 };
 
 const informationTable = {
@@ -133,17 +142,21 @@ const informationTable = {
   marginTop: "12px",
 };
 
-const informationTableLabel = {
-  ...resetText,
-  color: "rgb(102,102,102)",
-  fontSize: "10px",
+const paragraph = {
+  fontSize: "14px",
+  lineHeight: "22px",
+  color: "#3c4043",
 };
 
-const informationTableValue = {
+const link = {
+  ...paragraph,
   fontSize: "12px",
-  margin: "0",
-  padding: "0",
-  lineHeight: 1.4,
+  color: "rgb(13, 42, 31)",
+};
+
+const hr = {
+  borderColor: "#e8eaed",
+  margin: "20px 0",
 };
 
 const informationTableDisclaimer = {

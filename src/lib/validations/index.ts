@@ -78,3 +78,10 @@ export const SupportValidators = z.object({
   concern: z.string().min(1, { message: "Concern is required" }),
   attachment: z.string().min(1, { message: "Attachment is required" }),
 });
+
+export const AdvisingValidators = z.object({
+  teacherId: z.string().min(1, { message: "Teacher is required" }),
+  courseId: z.string().min(1, { message: "Course is required" }),
+  message: z.string().min(1, { message: "Message is required" }),
+});
+

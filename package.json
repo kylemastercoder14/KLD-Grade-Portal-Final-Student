@@ -57,6 +57,7 @@
     "html2canvas": "^1.4.1",
     "input-otp": "^1.2.4",
     "jose": "^5.9.6",
+    "jotai": "^2.10.2",
     "jsonwebtoken": "^9.0.2",
     "jspdf": "^2.5.2",
     "lucide-react": "^0.453.0",

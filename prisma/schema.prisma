@@ -63,6 +63,7 @@ model Students {
   grades          Grades[]
   documentRequest DocumentRequest[]
   consultation    Consultation[]
+  advising        Advising[]
 }
 
 model Teachers {
@@ -95,6 +96,7 @@ model Teachers {
   asssignTeacher      AssignTeacher[]
   assignCourseTeacher AssignCourseTeacher[]
   consultation        Consultation[]
+  advising            Advising[]
 }
 
 model AssignTeacher {
@@ -179,6 +181,7 @@ model Courses {
   assignCourseTeacher AssignCourseTeacher[]
   grades              Grades[]
   consultation        Consultation[]
+  advising            Advising[]
 }
 
 model Semester {
@@ -291,6 +294,22 @@ model Consultation {
 
   studentNumber String
   student       Students @relation(fields: [studentNumber], references: [studentNumber])
+
+  courseId String
+  course   Courses @relation(fields: [courseId], references: [id])
+}
+
+model Advising {
+  id String @id @default(cuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  studentNumber String
+  student       Students @relation(fields: [studentNumber], references: [studentNumber])
+
+  teacherId String
+  teacher   Teachers @relation(fields: [teacherId], references: [id])
 
   courseId String
   course   Courses @relation(fields: [courseId], references: [id])
