@@ -14,6 +14,7 @@ import { Loader2 } from "lucide-react";
 import { AdvisingValidators } from "@/lib/validations";
 import { getAllCourseTeacher } from "@/lib/server-actions/course-teacher";
 import { toast } from "sonner";
+import { useSaveAdvising } from "@/data/advising";
 
 interface GroupedTeacher {
   teacherId: string;
@@ -86,16 +87,15 @@ const AdvisingForm = ({
     fetchTeachers();
   }, []);
 
+  const { mutate: saveAdvising, isPending: isSaving } = useSaveAdvising();
+
   async function onSubmit(values: z.infer<typeof AdvisingValidators>) {
-    // Submit logic here
-    console.log(values);
-    // Example:
-    // saveAdvising(values, {
-    //   onSuccess: () => {
-    //     onClose();
-    //     window.location.reload();
-    //   },
-    // });
+    saveAdvising(values, {
+      onSuccess: () => {
+        onClose();
+        window.location.reload();
+      },
+    });
   }
 
   // Get selected teacher to filter courses
@@ -119,6 +119,7 @@ const AdvisingForm = ({
               fieldType={FormFieldType.SELECT}
               isRequired={true}
               placeholder="Select your teacher"
+              disabled={isSaving}
               label="Professor"
               name="teacherId"
               dynamicOptions={teachers.map((teacher) => ({
@@ -133,6 +134,7 @@ const AdvisingForm = ({
               fieldType={FormFieldType.SELECT}
               isRequired={true}
               placeholder="Select your course"
+              disabled={isSaving}
               label="Course"
               name="courseId"
               dynamicOptions={
@@ -152,13 +154,19 @@ const AdvisingForm = ({
               placeholder="Enter your message here"
               label="Message"
               isRequired={true}
+              disabled={isSaving}
               name="message"
             />
           </div>
 
           {/* Submit Button */}
-          <Button className="w-full mt-4" type="submit" size="sm">
-            {/* {isSaving && <Loader2 className="animate-spin w-4 h-4 mr-2" />} */}
+          <Button
+            className="w-full mt-4"
+            disabled={isSaving}
+            type="submit"
+            size="sm"
+          >
+            {isSaving && <Loader2 className="animate-spin w-4 h-4 mr-2" />}
             Submit Message
           </Button>
         </form>

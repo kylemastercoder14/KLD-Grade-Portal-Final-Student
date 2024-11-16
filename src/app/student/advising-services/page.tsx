@@ -2,18 +2,24 @@ import { CalendarDays, Home } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import AdvisingServicesClient from "./_components/client";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { getAllAdvising } from "@/lib/server-actions/advising";
 
 const AdvisingServices = async () => {
-  //   const queryClient = new QueryClient();
+  const queryClient = new QueryClient();
 
   // Prefetch the data from the server
-  //   await queryClient.prefetchQuery({
-  //     queryKey: ["announcements"],
-  //     queryFn: getAllAnnouncements,
-  //   });
+  await queryClient.prefetchQuery({
+    queryKey: ["advising"],
+    queryFn: getAllAdvising,
+  });
 
   // Hydrate the query data for the client
-  //   const dehydratedState = dehydrate(queryClient);
+  const dehydratedState = dehydrate(queryClient);
   return (
     <div className="max-w-7xl mx-auto mt-5">
       <div className="dark:bg-zinc-900 bg-zinc-100 px-5 py-3 flex items-center justify-between">
@@ -37,10 +43,9 @@ const AdvisingServices = async () => {
         </div>
       </div>
       <div className="dark:bg-zinc-900 bg-zinc-100 mt-5 px-5 py-3">
-        <AdvisingServicesClient />
-        {/* <HydrationBoundary state={dehydratedState}>
-          
-        </HydrationBoundary> */}
+        <HydrationBoundary state={dehydratedState}>
+          <AdvisingServicesClient />
+        </HydrationBoundary>
       </div>
     </div>
   );
