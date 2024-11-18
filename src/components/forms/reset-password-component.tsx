@@ -9,17 +9,34 @@ import { Form } from "../ui/form";
 import CustomFormField from "../globals/custom-formfield";
 import { Button } from "../ui/button";
 import { FormFieldType } from "@/constants";
+import { toast } from "sonner";
+import { resetPassword } from "@/lib/server-actions/login";
+import { Loader2 } from "lucide-react";
 
 const ResetPasswordComponent = () => {
+  const [loading, setLoading] = React.useState(false);
   const form = useForm<z.infer<typeof ResetPasswordValidators>>({
     resolver: zodResolver(ResetPasswordValidators),
     defaultValues: {
-      studentNumber: "",
+      email: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof ResetPasswordValidators>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof ResetPasswordValidators>) {
+    setLoading(true);
+    try {
+      const response = await resetPassword(values.email);
+      if (response.error) {
+        toast.error(response.error);
+      } else {
+        toast.success(response.success);
+      }
+    } catch (error) {
+      toast.error("Failed to reset password. Please try again.");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   }
   return (
     <Form {...form}>
@@ -28,11 +45,15 @@ const ResetPasswordComponent = () => {
           fieldType={FormFieldType.INPUT}
           control={form.control}
           isRequired
-          label="Student Number"
-          placeholder="KLD-XX-XXXXXX"
-          name="studentNumber"
+          disabled={loading}
+          label="KLD Email Address"
+          placeholder="jdelacruz@kld.edu.ph"
+          name="email"
         />
-        <Button className="w-full mt-2" type="submit">Reset</Button>
+        <Button disabled={loading} className="w-full mt-2" type="submit">
+          {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+          Reset
+        </Button>
       </form>
     </Form>
   );

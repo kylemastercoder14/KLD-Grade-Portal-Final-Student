@@ -1,15 +1,17 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGetAdvising } from "@/data/advising";
 import { format, formatDistanceToNow } from "date-fns";
-import { Loader2, Pencil } from "lucide-react";
+import { Loader2, Pencil, Send } from "lucide-react";
 import React from "react";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Advising, Courses, Teachers } from "@prisma/client";
 import AdvisingForm from "@/components/forms/advising-form";
+import { Textarea } from "@/components/ui/textarea";
 
 interface AdvisingProps extends Advising {
   teacher: Teachers;
@@ -40,7 +42,10 @@ const AdvisingServicesClient = () => {
 
   return (
     <>
-    <AdvisingForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <AdvisingForm
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
       <div className="grid md:grid-cols-10">
         <div className="col-span-3 border h-[50vh] overflow-y-auto px-3 py-2">
           <h3>Inbox</h3>
@@ -116,7 +121,19 @@ const AdvisingServicesClient = () => {
                 </p>
               </div>
               <Separator className="my-3" />
-              <p className="text-sm font-normal">{selectedItem.message}</p>
+              <div className="flex flex-col h-[40vh]">
+                <p className="text-sm font-normal">{selectedItem.message}</p>
+                <div className="mt-auto">
+                  <Textarea
+                    placeholder={`Reply ${selectedItem.teacher.firstName} ${selectedItem.teacher.lastName}...`}
+                  />
+                  <Button variant="secondary" size="sm" className="mt-2 w-full">
+                    {" "}
+                    <Send className="w-4 h-4 mr-2" />
+                    Send Message
+                  </Button>
+                </div>
+              </div>
             </>
           ) : (
             <p>Select a message to see the details</p>

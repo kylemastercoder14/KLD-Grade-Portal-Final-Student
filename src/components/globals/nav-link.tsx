@@ -51,7 +51,7 @@ const NavLink = () => {
         >
           My Current Enrolled Course
         </Link>
-        <Link
+        {/* <Link
           className={cn(
             "border-r pr-3 py-2 hover:text-primary",
             pathname === "/student/advising-services" ? "text-primary" : ""
@@ -59,7 +59,7 @@ const NavLink = () => {
           href="/student/advising-services"
         >
           Advising Services
-        </Link>
+        </Link> */}
         <Button onClick={() => setIsOpen(true)} size="sm" className="my-2">
           Request a Document
         </Button>

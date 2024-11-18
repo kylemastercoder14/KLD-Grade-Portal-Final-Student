@@ -27,8 +27,8 @@ const Header = async () => {
             </div>
           </Link>
           <div className="flex items-center gap-3">
-            <UserDropdown user={student} />
             <SwitchMode />
+            <UserDropdown user={student} />
           </div>
         </div>
         <NavLink />

@@ -42,7 +42,7 @@ const AdvisingServices = async () => {
           <span className="text-sm text-primary">Kyle Andre Lim</span>
         </div>
       </div>
-      <div className="dark:bg-zinc-900 bg-zinc-100 mt-5 px-5 py-3">
+      <div className="dark:bg-zinc-900 bg-zinc-100 mt-5">
         <HydrationBoundary state={dehydratedState}>
           <AdvisingServicesClient />
         </HydrationBoundary>
