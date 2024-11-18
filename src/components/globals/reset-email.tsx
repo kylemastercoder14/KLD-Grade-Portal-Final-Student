@@ -55,7 +55,7 @@ export const ResetEmail = ({
             </Text>
             <Link
               style={button}
-              href={`http://localhost:3000/new-password/${studentId}`}
+              href={`https://kld-grade-portal-final-student.vercel.app/new-password/${studentId}`}
             >
               Reset Password
             </Link>
