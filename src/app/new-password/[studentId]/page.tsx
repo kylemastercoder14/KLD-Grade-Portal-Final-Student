@@ -1,16 +1,11 @@
-"use client";
-
 import { ModeToggle } from "@/components/globals/mode-toggle";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import React, { Suspense } from "react";
 import NewPasswordComponent from "@/components/forms/new-password-component";
 import { Loader2 } from "lucide-react";
 
-const NewPassword = () => {
-  const searchParams = useSearchParams();
-  const studentId = searchParams.get("id");
+const NewPassword = ({ params }: { params: { studentId: string } }) => {
   return (
     <Suspense fallback={<Loader2 className="w-5 h-5 animate-spin" />}>
       <div className="flex flex-col relative h-screen items-center justify-center bg-[url('/school.jpg')] bg-no-repeat bg-cover">
@@ -31,7 +26,7 @@ const NewPassword = () => {
           </p>
           <Card className="mt-5">
             <CardContent className="p-5">
-              <NewPasswordComponent studentId={studentId as string} />
+              <NewPasswordComponent studentId={params.studentId as string} />
             </CardContent>
           </Card>
           <p className="bg-black/40 text-center text-white px-5 py-1 rounded-md mt-3">

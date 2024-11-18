@@ -55,7 +55,7 @@ export const ResetEmail = ({
             </Text>
             <Link
               style={button}
-              href={`http://localhost:3000/new-password?id=${studentId}`}
+              href={`http://localhost:3000/new-password/${studentId}`}
             >
               Reset Password
             </Link>
