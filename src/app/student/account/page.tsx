@@ -6,7 +6,7 @@ import React from "react";
 const Account = async () => {
   const { student } = await useUser();
   return (
-    <div className="max-w-7xl mx-auto mt-5">
+    <div className="md:max-w-7xl px-5 md:mx-auto mt-5">
       {student ? (
         <AccountProfile user={student} />
       ) : (
