@@ -23,10 +23,10 @@ const AnnouncementPage = async ({
     },
   });
   return (
-    <div className="max-w-7xl mx-auto mt-5 pb-10">
-      <div className="dark:bg-zinc-900 bg-zinc-100 px-5 py-3 flex items-center justify-between">
+    <div className="md:max-w-7xl mx-auto mt-5 pb-10">
+      <div className="dark:bg-zinc-900 bg-zinc-100 px-5 py-3 flex md:flex-row gap-3 flex-col md:items-center items-start md:justify-between">
         <div className="flex items-center gap-3">
-          <Home size={40} className="text-primary" />
+          <Home size={40} className="text-primary md:block hidden" />
           <div className="flex flex-col items-start justify-center">
             <p className="text-xl font-semibold">Grade Portal</p>
             <p className="text-sm text-muted-foreground">
@@ -61,7 +61,7 @@ const AnnouncementPage = async ({
             src={data?.image ?? ""}
             alt="Image"
             fill
-            className="w-full h-full"
+            className="w-full h-full md:object-none object-cover"
           />
         </div>
       </div>

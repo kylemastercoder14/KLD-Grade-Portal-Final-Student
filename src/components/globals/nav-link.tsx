@@ -17,12 +17,13 @@ const NavLink = () => {
       <div className="w-full md:px-[330px] px-10 md:border-t mx-auto md:flex-row flex-col gap-5 items-center">
         <Link
           className={cn(
-            "md:border-r pr-3 py-2 hover:text-primary",
+            "md:border-r md:text-md text-sm pr-3 py-2 hover:text-primary",
             pathname === "/student/dashboard" ? "text-primary" : ""
           )}
           href="/student/dashboard"
         >
-          <Home />
+          Dashboard
+          <Home className="md:block hidden" />
         </Link>
         <Link
           className={cn(
