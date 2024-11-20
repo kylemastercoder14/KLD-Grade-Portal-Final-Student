@@ -19,7 +19,9 @@ const Header = async () => {
         <div className="md:max-w-7xl px-10 md:px-0 mx-auto flex py-2 items-center justify-between">
           <div className="flex items-center gap-2">
             <Link className="flex items-center gap-3" href="/student/dashboard">
-              <Image src="/kld-logo.png" alt="Logo" width={60} height={60} />
+              <div className="relative md:w-20 md:h-20 w-12 h-12">
+                <Image src="/kld-logo.png" alt="Logo" fill className="w-full h-full" />
+              </div>
               <div className="md:flex flex-col hidden">
                 <p className="text-xl tracking-[-0.08em] font-bold">
                   KLD Grade Portal

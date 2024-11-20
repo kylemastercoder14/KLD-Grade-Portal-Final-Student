@@ -30,9 +30,9 @@ const Dashboard = async () => {
   const dehydratedState = dehydrate(queryClient);
   return (
     <div className="md:max-w-7xl w-full mx-auto mt-5">
-      <div className="dark:bg-zinc-900 bg-zinc-100 px-5 py-3 flex items-center justify-between">
+      <div className="dark:bg-zinc-900 bg-zinc-100 px-5 py-3 flex md:flex-row gap-3 flex-col items-center md:justify-between">
         <div className="flex items-center gap-3">
-          <Home size={40} className="text-primary" />
+          <Home size={40} className="text-primary md:block hidden" />
           <div className="flex flex-col items-start justify-center">
             <p className="text-xl font-semibold">Grade Portal</p>
             <p className="text-sm text-muted-foreground">
