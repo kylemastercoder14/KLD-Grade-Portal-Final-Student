@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useGetConsultation } from "@/data/consultation";
 import { useGetCourseTeacher } from "@/data/course-teacher";
 import { Loader2, User } from "lucide-react";
 import React from "react";
@@ -18,6 +19,7 @@ import { toast } from "sonner";
 
 const ConsultationClient = () => {
   const { data: courseTeacher, error, isLoading } = useGetCourseTeacher();
+  const { data: consultation } = useGetConsultation();
   const [isMounted, setIsMounted] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [selectedTeacher, setSelectedTeacher] = React.useState<{
@@ -37,9 +39,20 @@ const ConsultationClient = () => {
     }
   }, [error]);
 
-  const handleOpenModal = (teacher: { id: string; name: string; course: string; courseId: string; }) => {
+  const handleOpenModal = (teacher: {
+    id: string;
+    name: string;
+    course: string;
+    courseId: string;
+  }) => {
     setSelectedTeacher(teacher);
     setIsModalOpen(true);
+  };
+
+  const isConsultationExists = (teacherId: string, courseId: string) => {
+    return consultation?.data?.some(
+      (consult) => consult.teacherId === teacherId && consult.courseId === courseId
+    );
   };
 
   if (!isMounted) {
@@ -74,7 +87,7 @@ const ConsultationClient = () => {
                   <Loader2 className="w-4 h-4 animate-spin" />
                 </TableCell>
               </TableRow>
-            ) : (
+            ) : courseTeacher?.data && courseTeacher.data.length > 0 ? (
               courseTeacher?.data?.map((course) => (
                 <TableRow key={course.id}>
                   <TableCell>{course.section.name}</TableCell>
@@ -90,11 +103,12 @@ const ConsultationClient = () => {
                       onClick={() =>
                         handleOpenModal({
                           id: course.teacher.id,
-                          name: course.teacher.firstName + " " + course.teacher.lastName,
+                          name: `${course.teacher.firstName} ${course.teacher.lastName}`,
                           course: course.course.name,
                           courseId: course.course.id,
                         })
                       }
+                      disabled={isConsultationExists(course.teacherId, course.courseId)}
                     >
                       <User className="mr-2 w-4 h-4" />
                       Consult
@@ -102,6 +116,12 @@ const ConsultationClient = () => {
                   </TableCell>
                 </TableRow>
               ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={5} className="text-center">
+                  No data found
+                </TableCell>
+              </TableRow>
             )}
           </TableBody>
         </Table>

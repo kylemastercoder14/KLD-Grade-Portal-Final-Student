@@ -50,36 +50,40 @@ const RequestedDocumentsClient = () => {
       <TableBody>
         {requestedDocumentLoading ? (
           <TableRow>
-            <TableCell colSpan={6} className="text-center">
+            <TableCell colSpan={4} className="text-center">
               <div className="flex mt-3 items-center justify-center">
                 <Loader2 className="w-6 h-6 animate-spin" />
               </div>
             </TableCell>
           </TableRow>
+        ) : (requestedDocumentData?.data ?? []).length > 0 ? (
+          requestedDocumentData?.data?.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell>{item.typeDocument}</TableCell>
+              <TableCell>{item.purpose}</TableCell>
+              <TableCell>
+                <Badge
+                  variant={
+                    item.status === "Pending" ? "destructive" : "secondary"
+                  }
+                >
+                  {item.status}
+                </Badge>
+              </TableCell>
+              <TableCell>
+                <Button variant="secondary" size="sm" disabled>
+                  <Printer className="w-4 h-4 mr-2" />
+                  Print
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))
         ) : (
-          requestedDocumentData?.data?.map((item) => {
-            return (
-              <TableRow key={item.id}>
-                <TableCell>{item.typeDocument}</TableCell>
-                <TableCell>{item.purpose}</TableCell>
-                <TableCell>
-                  <Badge
-                    variant={
-                      item.status === "Pending" ? "destructive" : "secondary"
-                    }
-                  >
-                    {item.status}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  <Button variant="secondary" size="sm" disabled>
-                    <Printer className="w-4 h-4 mr-2" />
-                    Print
-                  </Button>
-                </TableCell>
-              </TableRow>
-            );
-          })
+          <TableRow>
+            <TableCell colSpan={4} className="text-center">
+              No data found
+            </TableCell>
+          </TableRow>
         )}
       </TableBody>
     </Table>

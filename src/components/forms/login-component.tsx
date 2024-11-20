@@ -33,8 +33,7 @@ const LoginComponent = () => {
       if (response.error) {
         toast.error(response.error);
       } else {
-        toast.success("Redirecting to dashboard...");
-        window.location.href = "/student/dashboard";
+        window.location.href = "/verify";
       }
     } catch (error) {
       console.error(error);

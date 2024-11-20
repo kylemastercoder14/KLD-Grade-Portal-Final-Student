@@ -13,6 +13,10 @@ export const getAllGrades = async () => {
     const data = await db.grades.findMany({
       where: {
         studentNumber: student.studentNumber,
+        teacherSigned: true,
+        deanSigned: true,
+        programChairSigned: true,
+        registrarSigned: true,
       },
       orderBy: {
         createdAt: "asc",

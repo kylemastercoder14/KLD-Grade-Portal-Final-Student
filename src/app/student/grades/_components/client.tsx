@@ -79,7 +79,7 @@ const GradeClient = () => {
                   </div>
                 </TableCell>
               </TableRow>
-            ) : (
+            ) : gradesData?.data?.length ?? 0 > 0 ? (
               gradesData?.data?.map((grade) => {
                 const course = getCourseDetails(grade.courseCode);
                 return (
@@ -105,6 +105,12 @@ const GradeClient = () => {
                   </TableRow>
                 );
               })
+            ) : (
+              <TableRow>
+                <TableCell colSpan={6} className="text-center">
+                  No grades found yet.
+                </TableCell>
+              </TableRow>
             )}
           </TableBody>
         </Table>

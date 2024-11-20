@@ -49,11 +49,11 @@ const EnrolledCourseClient = () => {
         <TableBody>
           {isLoading ? (
             <TableRow>
-              <TableCell colSpan={5} className="text-center">
+              <TableCell colSpan={4} className="text-center">
                 <Loader2 className="w-4 h-4 animate-spin" />
               </TableCell>
             </TableRow>
-          ) : (
+          ) : courseTeacher?.data && courseTeacher.data.length > 0 ? (
             courseTeacher?.data?.map((course) => (
               <TableRow key={course.id}>
                 <TableCell>
@@ -66,6 +66,12 @@ const EnrolledCourseClient = () => {
                 </TableCell>
               </TableRow>
             ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={4} className="text-center">
+                No enrolled courses found yet.
+              </TableCell>
+            </TableRow>
           )}
         </TableBody>
       </Table>

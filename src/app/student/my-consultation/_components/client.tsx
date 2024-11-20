@@ -50,36 +50,40 @@ const MyConsultationClient = () => {
       <TableBody>
         {consultationLoading ? (
           <TableRow>
-            <TableCell colSpan={6} className="text-center">
+            <TableCell colSpan={5} className="text-center">
               <div className="flex mt-3 items-center justify-center">
                 <Loader2 className="w-6 h-6 animate-spin" />
               </div>
             </TableCell>
           </TableRow>
+        ) : (consultationData?.data ?? []).length > 0 ? (
+          consultationData?.data?.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell>
+                {item.course.name} ({item.course.code})
+              </TableCell>
+              <TableCell>{item.concern}</TableCell>
+              <TableCell>{item.comment}</TableCell>
+              <TableCell>
+                {item.teacher.firstName} {item.teacher.lastName}
+              </TableCell>
+              <TableCell>
+                <Badge
+                  variant={
+                    item.status === "Pending" ? "destructive" : "secondary"
+                  }
+                >
+                  {item.status}
+                </Badge>
+              </TableCell>
+            </TableRow>
+          ))
         ) : (
-          consultationData?.data?.map((item) => {
-            return (
-              <TableRow key={item.id}>
-                <TableCell>
-                  {item.course.name} ({item.course.code})
-                </TableCell>
-                <TableCell>{item.concern}</TableCell>
-                <TableCell>{item.comment}</TableCell>
-                <TableCell>
-                  {item.teacher.firstName} {item.teacher.lastName}
-                </TableCell>
-                <TableCell>
-                  <Badge
-                    variant={
-                      item.status === "Pending" ? "destructive" : "secondary"
-                    }
-                  >
-                    {item.status}
-                  </Badge>
-                </TableCell>
-              </TableRow>
-            );
-          })
+          <TableRow>
+            <TableCell colSpan={5} className="text-center">
+              No consultaion found yet.
+            </TableCell>
+          </TableRow>
         )}
       </TableBody>
     </Table>
