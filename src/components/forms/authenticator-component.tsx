@@ -136,7 +136,7 @@ const AuthenticatorComponent = () => {
                   <div className="flex flex-col gap-4 mt-5">
                     <Label>One Time Password Code (OTP)</Label>
                     <OtpStyledInput
-                      className="md:!w-[4.8rem] !w-10 border dark:border-input border-zinc-300"
+                      className="md:!w-[4.8rem] !w-[35px] md:!h-14 !h-10 border dark:border-input border-zinc-300"
                       numInputs={6}
                       value={otp}
                       onChange={(value) => setOtp(value)}
