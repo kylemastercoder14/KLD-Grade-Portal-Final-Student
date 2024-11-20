@@ -8,7 +8,7 @@ import { Loader2 } from "lucide-react";
 const NewPassword = ({ params }: { params: { studentId: string } }) => {
   return (
     <Suspense fallback={<Loader2 className="w-5 h-5 animate-spin" />}>
-      <div className="flex flex-col relative h-screen items-center justify-center bg-[url('/school.jpg')] bg-no-repeat bg-cover">
+      <div className="flex flex-col px-10 relative h-screen items-center justify-center bg-[url('/school.jpg')] bg-no-repeat bg-cover">
         <div className="overlay fixed bg-black/60 w-full h-full backdrop-blur-sm"></div>
         <div className="fixed bottom-3 right-3 z-50 bg-white dark:bg-black p-1 rounded-full">
           <ModeToggle />

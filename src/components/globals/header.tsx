@@ -14,10 +14,10 @@ const Header = async () => {
     <>
       <ModalClient />
       <div className="sticky dark:bg-zinc-900 bg-zinc-100 z-50 inset-x-0 top-0 border-b w-full">
-        <div className="max-w-7xl mx-auto flex py-2 items-center justify-between">
+        <div className="md:max-w-7xl px-10 md:px-0 mx-auto flex py-2 items-center justify-between">
           <Link className="flex items-center gap-3" href="/student/dashboard">
             <Image src="/kld-logo.png" alt="Logo" width={60} height={60} />
-            <div className="flex flex-col">
+            <div className="md:flex flex-col hidden">
               <p className="text-xl tracking-[-0.08em] font-bold">
                 KLD Grade Portal
               </p>
