@@ -6,11 +6,7 @@ import SwitchMode from "./switch-mode";
 import NavLink from "./nav-link";
 import { useUser } from "@/hooks/use-user";
 import ModalClient from "./modal-client";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 
 const Header = async () => {
@@ -47,7 +43,9 @@ const Header = async () => {
             <UserDropdown user={student} />
           </div>
         </div>
-        <NavLink />
+        <div className="md:block hidden">
+          <NavLink />
+        </div>
       </div>
     </>
   );

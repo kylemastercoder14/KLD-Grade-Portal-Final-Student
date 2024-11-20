@@ -14,7 +14,7 @@ const NavLink = () => {
   return (
     <>
       <RequestDocument isOpen={isOpen} onClose={() => setIsOpen(false)} />
-      <div className="w-full md:px-[330px] px-10 border-t mx-auto flex flex-row md:flex-col gap-5 items-center">
+      <div className="w-full md:px-[330px] px-10 border-t mx-auto md:flex-row flex-col gap-5 items-center">
         <Link
           className={cn(
             "border-r pr-3 py-2 hover:text-primary",
