@@ -16,7 +16,7 @@ const Header = async () => {
     <>
       <ModalClient />
       <div className="sticky dark:bg-zinc-900 bg-zinc-100 z-50 inset-x-0 top-0 border-b w-full">
-        <div className="md:max-w-7xl px-5 md:px-0 mx-auto flex py-2 items-center md:justify-between gap-5">
+        <div className="md:max-w-7xl px-5 md:px-0 mx-auto flex py-2 items-center justify-between">
           <div className="flex items-center gap-2">
             <Link className="flex items-center gap-3" href="/student/dashboard">
               <div className="relative md:w-20 md:h-20 w-10 h-10">

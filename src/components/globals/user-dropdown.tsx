@@ -34,7 +34,7 @@ const UserDropdown = ({ user }: { user: UserDropdownProps }) => {
               {user.lastName.charAt(0)}
             </AvatarFallback>
           </Avatar>
-          <div className="flex flex-col items-start">
+          <div className="md:flex hidden flex-col items-start">
             <p className="font-bold text-sm">
               {user.firstName} {user.lastName}
             </p>
