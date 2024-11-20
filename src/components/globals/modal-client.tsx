@@ -10,7 +10,7 @@ const ModalClient = () => {
   const [isSupportOpen, setIsSupportOpen] = React.useState(false);
   return (
     <>
-      <div className="fixed bottom-3 right-5 flex items-center gap-2">
+      <div className="fixed md:bottom-3 right-5 bottom-5 flex items-center gap-2">
         <Button
           onClick={() => setIsFeedbackOpen(true)}
           size="sm"
