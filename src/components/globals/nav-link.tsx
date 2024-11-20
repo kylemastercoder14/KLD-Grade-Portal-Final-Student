@@ -14,10 +14,10 @@ const NavLink = () => {
   return (
     <>
       <RequestDocument isOpen={isOpen} onClose={() => setIsOpen(false)} />
-      <div className="w-full md:px-[330px] px-10 border-t mx-auto md:flex-row flex-col gap-5 items-center">
+      <div className="w-full md:px-[330px] px-10 md:border-t mx-auto md:flex-row flex-col gap-5 items-center">
         <Link
           className={cn(
-            "border-r pr-3 py-2 hover:text-primary",
+            "md:border-r pr-3 py-2 hover:text-primary",
             pathname === "/student/dashboard" ? "text-primary" : ""
           )}
           href="/student/dashboard"
@@ -26,7 +26,7 @@ const NavLink = () => {
         </Link>
         <Link
           className={cn(
-            "border-r md:text-md text-sm pr-3 py-2 hover:text-primary",
+            "md:border-r md:text-md text-sm pr-3 py-2 hover:text-primary",
             pathname === "/student/grades" ? "text-primary" : ""
           )}
           href="/student/grades"
@@ -35,7 +35,7 @@ const NavLink = () => {
         </Link>
         <Link
           className={cn(
-            "border-r md:text-md text-sm pr-3 py-2 hover:text-primary",
+            "md:border-r md:text-md text-sm pr-3 py-2 hover:text-primary",
             pathname === "/student/consultation" ? "text-primary" : ""
           )}
           href="/student/consultation"
@@ -44,7 +44,7 @@ const NavLink = () => {
         </Link>
         <Link
           className={cn(
-            "border-r md:text-md text-sm pr-3 py-2 hover:text-primary",
+            "md:border-r md:text-md text-sm pr-3 py-2 hover:text-primary",
             pathname === "/student/enrolled-course" ? "text-primary" : ""
           )}
           href="/student/enrolled-course"
