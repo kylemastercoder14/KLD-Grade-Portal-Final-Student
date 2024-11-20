@@ -17,7 +17,7 @@ const NavLink = () => {
       <div className="w-full md:px-[330px] px-5 md:border-t md:mx-auto md:flex-row flex flex-col gap-5 items-start justify-center">
         <Link
           className={cn(
-            "md:border-r md:text-md text-sm pr-3 py-2 hover:text-primary",
+            "md:border-r md:text-md text-sm md:pr-2 md:py-2 hover:text-primary",
             pathname === "/student/dashboard" ? "text-primary" : ""
           )}
           href="/student/dashboard"
@@ -27,7 +27,7 @@ const NavLink = () => {
         </Link>
         <Link
           className={cn(
-            "md:border-r md:text-md text-sm pr-3 py-2 hover:text-primary",
+            "md:border-r md:text-md text-sm md:pr-2 md:py-2 hover:text-primary",
             pathname === "/student/grades" ? "text-primary" : ""
           )}
           href="/student/grades"
@@ -36,7 +36,7 @@ const NavLink = () => {
         </Link>
         <Link
           className={cn(
-            "md:border-r md:text-md text-sm pr-3 py-2 hover:text-primary",
+            "md:border-r md:text-md text-sm md:pr-2 md:py-2 hover:text-primary",
             pathname === "/student/consultation" ? "text-primary" : ""
           )}
           href="/student/consultation"
@@ -45,7 +45,7 @@ const NavLink = () => {
         </Link>
         <Link
           className={cn(
-            "md:border-r md:text-md text-sm pr-3 py-2 hover:text-primary",
+            "md:border-r md:text-md text-sm md:pr-2 md:py-2 hover:text-primary",
             pathname === "/student/enrolled-course" ? "text-primary" : ""
           )}
           href="/student/enrolled-course"
@@ -54,7 +54,7 @@ const NavLink = () => {
         </Link>
         {/* <Link
           className={cn(
-            "border-r pr-3 py-2 hover:text-primary",
+            "border-r md:pr-2 md:py-2 hover:text-primary",
             pathname === "/student/advising-services" ? "text-primary" : ""
           )}
           href="/student/advising-services"
