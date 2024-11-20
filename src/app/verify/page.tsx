@@ -18,7 +18,7 @@ const Home = () => {
             KLD Student Portal
           </p>
         </div>
-        <p className="bg-black/40 text-center text-white px-5 py-1 rounded-md mt-3">
+        <p className="bg-black/40 md:text-md text-sm text-center text-white px-5 py-1 rounded-md mt-3">
           Log in to view your grades, access academic advising tools, and stay
           updated on your educational journey.
         </p>
@@ -27,7 +27,7 @@ const Home = () => {
             <AuthenticatorComponent />
           </CardContent>
         </Card>
-        <p className="bg-black/40 text-center text-white px-5 py-1 rounded-md mt-3">
+        <p className="bg-black/40 md:text-md text-sm text-center text-white px-5 py-1 rounded-md mt-3">
           <span className="text-emerald-300 font-semibold">
             Kolehiyo ng Lungsod ng Dasmarinas
           </span>{" "}

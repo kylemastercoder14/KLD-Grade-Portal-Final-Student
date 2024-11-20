@@ -8,7 +8,7 @@ import { ModeToggle } from "@/components/globals/mode-toggle";
 
 const Home = () => {
   return (
-    <div className="flex flex-col relative px-10 h-screen items-center justify-center bg-[url('/school.jpg')] bg-no-repeat bg-cover">
+    <div className="flex flex-col relative px-10 w-full h-screen items-center justify-center bg-[url('/school.jpg')] bg-no-repeat bg-cover">
       <div className="overlay fixed bg-black/60 w-full h-full backdrop-blur-sm"></div>
       <div className="fixed bottom-3 right-3 z-50 bg-white dark:bg-black p-1 rounded-full">
         <ModeToggle />
@@ -20,7 +20,7 @@ const Home = () => {
             KLD Student Portal
           </p>
         </div>
-        <p className="bg-black/40 text-center text-white px-5 py-1 rounded-md mt-3">
+        <p className="bg-black/40 md:text-md text-sm text-center text-white px-5 py-1 rounded-md mt-3">
           Log in to view your grades, access academic advising tools, and stay
           updated on your educational journey.
         </p>
@@ -28,10 +28,10 @@ const Home = () => {
           <CardContent className="p-5">
             <Tabs defaultValue="account">
               <TabsList className="w-full">
-                <TabsTrigger value="account" className="w-[300px]">
+                <TabsTrigger value="account" className="md:w-[300px] w-full">
                   LOG IN
                 </TabsTrigger>
-                <TabsTrigger value="password" className="w-[300px]">
+                <TabsTrigger value="password" className="md:w-[300px] w-full">
                   PASSWORD RESET
                 </TabsTrigger>
               </TabsList>
@@ -44,7 +44,7 @@ const Home = () => {
             </Tabs>
           </CardContent>
         </Card>
-        <p className="bg-black/40 text-center text-white px-5 py-1 rounded-md mt-3">
+        <p className="bg-black/40 md:text-md text-sm text-center text-white px-5 py-1 rounded-md mt-3">
           <span className="text-emerald-300 font-semibold">
             Kolehiyo ng Lungsod ng Dasmarinas
           </span>{" "}

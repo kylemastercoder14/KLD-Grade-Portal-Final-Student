@@ -29,7 +29,7 @@ const Dashboard = async () => {
   // Hydrate the query data for the client
   const dehydratedState = dehydrate(queryClient);
   return (
-    <div className="max-w-7xl mx-auto mt-5">
+    <div className="md:max-w-7xl w-full mx-auto mt-5">
       <div className="dark:bg-zinc-900 bg-zinc-100 px-5 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Home size={40} className="text-primary" />
