@@ -90,7 +90,9 @@ const AccountProfile = ({ user }: { user: AccountProps }) => {
 
   async function onSubmit(values: z.infer<typeof StudentValidators>) {
     saveStudent(values, {
-      onSuccess: () => router.push("/student/account"),
+      onSuccess: () => {
+        window.location.reload();
+      },
     });
   }
 

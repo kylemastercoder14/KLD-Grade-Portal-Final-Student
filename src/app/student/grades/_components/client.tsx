@@ -120,7 +120,7 @@ const GradeClient = () => {
         <Separator className="my-2" />
         <p className="text-center font-semibold">1ST YEAR</p>
         <Separator className="my-2" />
-        <div className="flex w-full items-center gap-4">
+        <div className="flex md:flex-row flex-col w-full md:items-center items-start gap-4">
           <div className="w-full mt-2">
             <p className="text-center font-semibold">1ST SEMESTER</p>
             <Table className="pr-2 border-x">
@@ -221,7 +221,7 @@ const GradeClient = () => {
         {/* <Separator className="my-2" /> */}
         <p className="text-center font-semibold mt-3">2ND YEAR</p>
         <Separator className="my-2" />
-        <div className="flex w-full items-center gap-4">
+        <div className="flex md:flex-row flex-col w-full md:items-center items-start gap-4">
           <div className="w-full mt-2">
             <p className="text-center font-semibold">1ST SEMESTER</p>
             <Table className="pr-2 border-x">
@@ -321,7 +321,7 @@ const GradeClient = () => {
         </div>
         <p className="text-center font-semibold mt-3">3RD YEAR</p>
         <Separator className="my-2" />
-        <div className="flex w-full items-center gap-4">
+        <div className="flex md:flex-row flex-col w-full md:items-center items-start gap-4">
           <div className="w-full mt-2">
             <p className="text-center font-semibold">1ST SEMESTER</p>
             <Table className="pr-2 border-x">
@@ -421,7 +421,7 @@ const GradeClient = () => {
         </div>
         <p className="text-center font-semibold mt-3">4TH YEAR</p>
         <Separator className="my-2" />
-        <div className="flex w-full items-center gap-4">
+        <div className="flex md:flex-row flex-col w-full md:items-center items-start gap-4">
           <div className="w-full mt-2">
             <p className="text-center font-semibold">1ST SEMESTER</p>
             <Table className="pr-2 border-x">
