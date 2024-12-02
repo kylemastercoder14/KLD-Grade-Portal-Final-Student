@@ -14,7 +14,7 @@ const NavLink = () => {
   return (
     <>
       <RequestDocument isOpen={isOpen} onClose={() => setIsOpen(false)} />
-      <div className="w-full md:px-[330px] px-5 md:border-t md:mx-auto md:flex-row flex flex-col gap-5 items-start justify-center">
+      <div className="w-full md:px-[330px] px-5 md:border-t md:mx-auto md:flex-row flex flex-col gap-5 items-start md:items-center justify-center">
         <Link
           className={cn(
             "md:border-r md:text-md text-sm md:pr-2 md:py-2 hover:text-primary",
@@ -22,8 +22,8 @@ const NavLink = () => {
           )}
           href="/student/dashboard"
         >
-          Dashboard
-          <Home className="md:block hidden" />
+          <span className="md:hidden block">Dashboard</span>
+          <Home className="md:block hidden md:mx-3" />
         </Link>
         <Link
           className={cn(

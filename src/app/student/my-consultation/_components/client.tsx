@@ -81,7 +81,7 @@ const MyConsultationClient = () => {
         ) : (
           <TableRow>
             <TableCell colSpan={5} className="text-center">
-              No consultaion found yet.
+              No consultation found yet.
             </TableCell>
           </TableRow>
         )}

@@ -9,15 +9,9 @@ import {
 import { getAllAnnouncements } from "@/lib/server-actions/announcement";
 import AnnouncementClient from "./_components/client";
 import { useUser } from "@/hooks/use-user";
-import db from "@/lib/db";
 
 const Dashboard = async () => {
   const { student } = await useUser();
-  const semester = await db.semester.findFirst({
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
   const queryClient = new QueryClient();
 
   // Prefetch the data from the server
@@ -36,7 +30,7 @@ const Dashboard = async () => {
           <div className="flex flex-col items-start justify-center">
             <p className="text-xl font-semibold">Grade Portal</p>
             <p className="text-sm text-muted-foreground">
-              {semester?.year} / {semester?.name} / {student?.programs.name}
+              2024 - 2024 / 1ST SEMESTER / {student?.programs.name}
             </p>
           </div>
         </div>
@@ -52,7 +46,7 @@ const Dashboard = async () => {
       <div className="dark:bg-zinc-900 bg-zinc-100 px-5 py-3 mt-5">
         <p className="text-2xl font-semibold">Announcement</p>
         <p className="text-sm text-muted-foreground">
-          Hi Kyle Andre Lim, kindly read about some of the important
+          Hi {student?.firstName} {student?.lastName}, kindly read about some of the important
           announcement below.
         </p>
         <HydrationBoundary state={dehydratedState}>

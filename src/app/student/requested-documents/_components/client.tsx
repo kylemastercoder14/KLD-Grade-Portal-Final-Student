@@ -8,12 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Loader2, Printer } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import React from "react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { useGetRequestedDocuments } from "@/data/document";
-import { Button } from "@/components/ui/button";
 
 const RequestedDocumentsClient = () => {
   const [isMounted, setIsMounted] = React.useState(false);
@@ -44,7 +43,6 @@ const RequestedDocumentsClient = () => {
           <TableHead>Type of Document</TableHead>
           <TableHead>Purpose</TableHead>
           <TableHead>Status</TableHead>
-          <TableHead>Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -69,12 +67,6 @@ const RequestedDocumentsClient = () => {
                 >
                   {item.status}
                 </Badge>
-              </TableCell>
-              <TableCell>
-                <Button variant="secondary" size="sm" disabled>
-                  <Printer className="w-4 h-4 mr-2" />
-                  Print
-                </Button>
               </TableCell>
             </TableRow>
           ))
